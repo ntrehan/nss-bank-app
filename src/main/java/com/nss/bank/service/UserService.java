@@ -37,7 +37,7 @@ public class UserService {
         user.setUsername(username);
         user.setPassword(passwordEncoder.encode(password));
         user.setRole(role);
-        user.setCustomerId(customerId);
+        user.setCustomerId(customer);
         userRepository.save(user);
     }
 

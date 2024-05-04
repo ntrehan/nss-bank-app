@@ -3,7 +3,7 @@ package com.nss.bank.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "nss_users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +15,9 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "customerid", nullable = false)
-    private String customerId;
+    @OneToOne
+    @JoinColumn(name = "customerid", nullable = false)
+    private Customer customerId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -47,11 +48,11 @@ public class User {
         this.password = password;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
+//    public String getCustomerId() {
+//        return customerId;
+//    }
 
-    public void setCustomerId(String customerId) {
+    public void setCustomerId(Customer customerId) {
         this.customerId = customerId;
     }
 
