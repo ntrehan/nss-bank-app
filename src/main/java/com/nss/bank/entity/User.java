@@ -1,17 +1,32 @@
 package com.nss.bank.entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "nss_users")
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Getter
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Getter
     @Column(nullable = false)
     private String password;
 
@@ -23,44 +38,36 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
     }
 
-    public String getUsername() {
-        return username;
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
     }
 
-    public String getPassword() {
-        return password;
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
-//    public String getCustomerId() {
-//        return customerId;
-//    }
 
-    public void setCustomerId(Customer customerId) {
-        this.customerId = customerId;
-    }
 
-    public Role getRole() {
-        return role;
-    }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+
+
+
 }

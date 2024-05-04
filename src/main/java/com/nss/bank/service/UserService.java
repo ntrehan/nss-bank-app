@@ -22,22 +22,17 @@ public class UserService {
 
     public void createUser(String username, String password, Role role, String customerId,
                            String customerName, String street, String city, String state, int zipCode) {
-        // Create and save the Customer
-        Customer customer = new Customer();
-        customer.setCustomerId(customerId);
-        customer.setName(customerName);
-        customer.setStreet(street);
-        customer.setCity(city);
-        customer.setState(state);
-        customer.setZipCode(zipCode);
+        Customer customer = new Customer(customerId,
+                customerName, street, city, state, zipCode);
         customerRepository.save(customer);
 
-        // Create and save the User
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(passwordEncoder.encode(password));
-        user.setRole(role);
-        user.setCustomerId(customer);
+        User user = User
+                .builder()
+                .username(username)
+                .customerId(customer)
+                .password(passwordEncoder.encode(password))
+                .role(role).build();
+
         userRepository.save(user);
     }
 

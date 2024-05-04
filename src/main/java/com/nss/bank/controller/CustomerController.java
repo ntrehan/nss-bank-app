@@ -32,7 +32,7 @@ public class CustomerController {
 
     @PutMapping("/{id}")
     public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
-        customer.setCustomerId(id);
+//        customer.setCustomerId(id);
         return customerService.saveCustomer(customer);
     }
 

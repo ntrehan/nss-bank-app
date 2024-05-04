@@ -1,75 +1,41 @@
 package com.nss.bank.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "nss_customer")
 public class Customer {
 
     @Id
+    @Getter
     @Column(name = "customerid", length = 10, nullable = false)
     private String customerId;
 
+    @Getter
     @Column(name = "name", length = 50, nullable = false)
     private String name;
 
+    @Getter
+    @Setter
     @Column(name = "street", length = 20, nullable = false)
     private String street;
 
+    @Getter
+    @Setter
     @Column(name = "city", length = 20, nullable = false)
     private String city;
 
+    @Getter
+    @Setter
     @Column(name = "state", length = 2, nullable = false)
     private String state;
 
+    @Getter
+    @Setter
     @Column(name = "zipcode", nullable = false)
     private int zipCode;
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public int getZipCode() {
-        return zipCode;
-    }
-
-    public void setZipCode(int zipCode) {
-        this.zipCode = zipCode;
-    }
 }
