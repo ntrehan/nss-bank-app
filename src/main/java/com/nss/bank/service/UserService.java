@@ -22,18 +22,19 @@ public class UserService {
 
     public void createUser(String username, String password, Role role, String customerId,
                            String customerName, String street, String city, String state, int zipCode) {
-        Customer customer = new Customer(customerId,
-                customerName, street, city, state, zipCode);
-        customerRepository.save(customer);
 
-        User user = User
-                .builder()
-                .username(username)
-                .customerId(customer)
-                .password(passwordEncoder.encode(password))
-                .role(role).build();
-
-        userRepository.save(user);
+//        Customer customer = new Customer(customerId,
+//                customerName, street, city, state, zipCode);
+//        customerRepository.save(customer);
+//
+//        User user = User
+//                .builder()
+//                .username(username)
+//                .customerId(customer)
+//                .password(passwordEncoder.encode(password))
+//                .role(role).build();
+//
+//        userRepository.save(user);
     }
 
     public boolean validateUserCredentials(String username, String rawPassword) {

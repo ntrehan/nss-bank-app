@@ -30,9 +30,9 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @OneToOne
-    @JoinColumn(name = "customerid", nullable = false)
-    private Customer customerId;
+//    @OneToOne
+//    @JoinColumn(name = "customerid", nullable = false)
+//    private Customer customerId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
