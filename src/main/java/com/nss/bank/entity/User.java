@@ -1,7 +1,10 @@
 package com.nss.bank.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,40 +16,23 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "nss_customer")
-public class Customer implements UserDetails {
-
+@Table(name = "nss_users")
+public class User implements UserDetails {
     @Id
-    @Getter
-    @Column(name = "customerid", length = 10, nullable = false)
-    private String customerId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Getter
-    @Column(name = "name", length = 50, nullable = false)
-    private String name;
+    @Column(nullable = false, unique = true)
+    private String username;
 
+    @Getter
     @Column(nullable = false)
     private String password;
 
-    @Getter
-    @Setter
-    @Column(name = "street", length = 20, nullable = false)
-    private String street;
-
-    @Getter
-    @Setter
-    @Column(name = "city", length = 20, nullable = false)
-    private String city;
-
-    @Getter
-    @Setter
-    @Column(name = "state", nullable = false)
-    private String state;
-
-    @Getter
-    @Setter
-    @Column(name = "zipcode", nullable = false)
-    private int zipCode;
+//    @OneToOne
+//    @JoinColumn(name = "customerid", nullable = false)
+//    private Customer customerId;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -55,16 +41,6 @@ public class Customer implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return null;
-    }
-
-    @Override
-    public String getUsername() {
-        return null;
     }
 
     @Override
@@ -86,5 +62,12 @@ public class Customer implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
+
+
+
+
+
+
 
 }

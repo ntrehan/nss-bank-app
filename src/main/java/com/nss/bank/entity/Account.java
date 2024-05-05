@@ -22,8 +22,9 @@ public abstract class Account {
     @Temporal(TemporalType.DATE)
     private Date openDate;
 
-    @Column(name = "customerid", length = 10, nullable = false)
-    private String customerId;
+    @ManyToOne
+    @JoinColumn(name = "customerid", nullable = false)
+    private Customer customerId;
 
     @Column(name = "city", length = 20, nullable = false)
     private String city;
@@ -67,13 +68,13 @@ public abstract class Account {
         this.openDate = openDate;
     }
 
-    public String getCustomerId() {
-        return customerId;
-    }
+//    public String getCustomerId() {
+//        return customerId;
+//    }
 
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
+//    public void setCustomerId(String customerId) {
+//        this.customerId = customerId;
+//    }
 
     public String getCity() {
         return city;

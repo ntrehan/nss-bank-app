@@ -1,7 +1,10 @@
 package com.nss.bank.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,42 +14,22 @@ import java.util.List;
 
 @Entity
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "nss_customer")
-public class Customer implements UserDetails {
+@AllArgsConstructor
+@Table(name="nss_employee")
+public class Employee implements UserDetails {
 
     @Id
-    @Getter
-    @Column(name = "customerid", length = 10, nullable = false)
-    private String customerId;
+    private String EmployeeId;
 
-    @Getter
-    @Column(name = "name", length = 50, nullable = false)
+    @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false, unique = true)
+    private String email;
 
     @Column(nullable = false)
     private String password;
-
-    @Getter
-    @Setter
-    @Column(name = "street", length = 20, nullable = false)
-    private String street;
-
-    @Getter
-    @Setter
-    @Column(name = "city", length = 20, nullable = false)
-    private String city;
-
-    @Getter
-    @Setter
-    @Column(name = "state", nullable = false)
-    private String state;
-
-    @Getter
-    @Setter
-    @Column(name = "zipcode", nullable = false)
-    private int zipCode;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -86,5 +69,6 @@ public class Customer implements UserDetails {
     public boolean isEnabled() {
         return false;
     }
+
 
 }
