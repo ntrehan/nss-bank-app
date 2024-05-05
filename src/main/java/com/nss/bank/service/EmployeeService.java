@@ -41,7 +41,8 @@ public class EmployeeService {
 //        return new Employee();
     }
     private String generateEmployeeId(String name) throws UnsupportedEncodingException {
-        byte[] bytes = name.getBytes("UTF-8");
+        String source = "EMP" + name + System.currentTimeMillis();
+        byte[] bytes = source.getBytes("UTF-8");
         UUID uuid = UUID.nameUUIDFromBytes(bytes);
         return uuid.toString();
     }

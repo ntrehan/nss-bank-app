@@ -2,6 +2,7 @@ package com.nss.bank.controller;
 
 import com.nss.bank.entity.Employee;
 import com.nss.bank.entity.Role;
+import com.nss.bank.service.CustomerService;
 import com.nss.bank.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,9 @@ public class AdminController {
     @Autowired
     private EmployeeService employeeService;
 
+    @Autowired
+    private CustomerService customerService;
+
     @PostMapping("/signup")
     public String signup(@RequestParam String name, @RequestParam String password, @RequestParam String email, @RequestParam Role role) {
         employeeService.saveEmployee(name, password, email, role);
@@ -24,10 +28,10 @@ public class AdminController {
     }
 
     @PostMapping("/add/customer")
-    public String addCustomer(@RequestParam String username, @RequestParam String password, @RequestParam Role role,
-                              @RequestParam String customerId, @RequestParam String customerName,
+    public String addCustomer(@RequestParam String name,
                               @RequestParam String street, @RequestParam String city,
                               @RequestParam String state, @RequestParam int zipCode) {
+        customerService.saveCustomer(name, street, city, state,zipCode);
         return "Hell Yeah";
     }
 }

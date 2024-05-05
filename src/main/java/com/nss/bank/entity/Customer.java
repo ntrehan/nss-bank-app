@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "nss_customer")
@@ -39,7 +40,7 @@ public class Customer implements UserDetails {
 
     @Getter
     @Setter
-    @Column(name = "state", length = 2, nullable = false)
+    @Column(name = "state", nullable = false)
     private String state;
 
     @Getter

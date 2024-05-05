@@ -25,16 +25,16 @@ public class CustomerController {
         return customerService.getCustomerById(id);
     }
 
-    @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer) {
-        return customerService.saveCustomer(customer);
-    }
-
-    @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
-//        customer.setCustomerId(id);
-        return customerService.saveCustomer(customer);
-    }
+//    @PostMapping
+//    public Customer createCustomer(@RequestBody Customer customer) {
+//        return customerService.saveCustomer(customer);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
+////        customer.setCustomerId(id);
+//        return customerService.saveCustomer(customer);
+//    }
 
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable String id) {
