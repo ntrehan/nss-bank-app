@@ -2,6 +2,7 @@ package com.nss.bank.service;
 
 import com.nss.bank.entity.Employee;
 import com.nss.bank.entity.Role;
+import com.nss.bank.entity.User;
 import com.nss.bank.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -32,6 +33,11 @@ public class EmployeeService {
                     .build();
 
             employeeRepository.save(employee);
+//            User user = User
+//                    .builder()
+//                    .role(Role.ADMIN)
+//                    .password(passwordEncoder.encode(password))
+//                    .username(employee.getUsername())
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong!";
         }

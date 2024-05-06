@@ -38,7 +38,7 @@ public class CustomerService {
                     .zipCode(zipcode)
                     .city(city)
                     .name(name)
-                    .password(passwordEncoder.encode(name+zipcode+city))
+                    .password(passwordEncoder.encode(name))
                     .state(state).build();
 
             customerRepository.save(customer);

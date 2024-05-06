@@ -20,9 +20,9 @@ public class UserController {
         return "User and customer successfully registered";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password) {
-        boolean isValid = userService.validateUserCredentials(username, password);
-        return isValid ? "Login successful" : "Invalid username or password";
-    }
+//    @PostMapping("/login")
+//    public String login(@RequestParam String username, @RequestParam String password) {
+//        boolean isValid = userService.validateUserCredentials(username, password);
+//        return isValid ? "Login successful" : "Invalid username or password";
+//    }
 }
