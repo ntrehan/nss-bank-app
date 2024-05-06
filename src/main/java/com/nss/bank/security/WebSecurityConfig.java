@@ -27,8 +27,7 @@ public class WebSecurityConfig {
                             .requestMatchers("/**").permitAll()
 //                        .requestMatchers("/admin/*").hasRole("ADMIN")
                 ).httpBasic(Customizer.withDefaults())
-                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .;
+                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
         return http.build();
     }
