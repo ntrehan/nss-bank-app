@@ -1,8 +1,10 @@
 package com.nss.bank.service;
 
-import com.nss.bank.entity.Customer;
-import com.nss.bank.entity.Role;
+import com.nss.bank.entity.*;
+import com.nss.bank.repository.AccountRepository;
 import com.nss.bank.repository.CustomerRepository;
+import com.nss.bank.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,12 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     public List<Customer> getAllCustomers() {
@@ -29,23 +37,38 @@ public class CustomerService {
         return customerRepository.findById(customerId);
     }
 
-    public String saveCustomer(String name, String street, String city, String state, int zipcode) {
+    @Transactional
+    public String saveCustomer(RequestModel requestModel) {
         try {
             Customer customer = Customer.builder()
-                    .customerId(generateCustomerId(name))
+                    .customerId(generateCustomerId(requestModel.getName()))
                     .role(Role.USER)
-                    .street(street)
-                    .zipCode(zipcode)
-                    .city(city)
-                    .name(name)
-                    .password(passwordEncoder.encode(name+zipcode+city))
-                    .state(state).build();
+                    .street(requestModel.getStreet())
+                    .zipCode(requestModel.getZipcode())
+                    .city(requestModel.getCity())
+                    .name(requestModel.getName())
+                    .password(passwordEncoder.encode("password"))
+                    .state(requestModel.getState()).build();
 
             customerRepository.save(customer);
+
+            User user = User.builder()
+                    .role(Role.USER)
+                    .username(customer.getUsername())
+                    .password(customer.getPassword())
+                    .build();
+            userRepository.save(user);
+
             return "Ho agya";
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong";
         }
+    }
+
+    public List<Account> getAccountsByCustomerId(String customerId) {
+        Customer customer = getCustomerById(customerId).orElseThrow(() -> new RuntimeException("No Customer"));
+
+        return accountRepository.findAllByCustomerId(customer);
     }
 
     public void deleteCustomer(String customerId) {

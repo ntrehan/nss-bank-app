@@ -37,8 +37,8 @@ public class UserService {
 //        userRepository.save(user);
     }
 
-    public boolean validateUserCredentials(String username, String rawPassword) {
-        User user = userRepository.findByUsername(username).orElse(null);
-        return user != null && passwordEncoder.matches(rawPassword, user.getPassword());
-    }
+//    public boolean validateUserCredentials(String username, String rawPassword) {
+//        User user = userRepository.findByUsername(username).orElse(null);
+//        return user != null && passwordEncoder.matches(rawPassword, user.getPassword());
+//    }
 }

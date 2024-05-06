@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/institutes")
+@RequestMapping("/institutes")
 public class EducationInstituteController {
 
     @Autowired
@@ -26,7 +26,7 @@ public class EducationInstituteController {
     }
 
     @PostMapping
-    public EducationInstitute createInstitute(@RequestBody EducationInstitute institute) {
+    public EducationInstitute createInstitute(@RequestBody EducationInstitute institute, @RequestHeader(name="Authorization") String token) {
         return educationInstituteService.saveInstitute(institute);
     }
 

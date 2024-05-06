@@ -2,7 +2,10 @@ package com.nss.bank.service;
 
 import com.nss.bank.entity.Employee;
 import com.nss.bank.entity.Role;
+import com.nss.bank.entity.User;
 import com.nss.bank.repository.EmployeeRepository;
+import com.nss.bank.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -20,11 +23,14 @@ public class EmployeeService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRepository userRepository;
+    @Transactional
     public String saveEmployee(String name, String password,String email, Role role)  {
         try {
             Employee employee = Employee
                     .builder()
-                    .EmployeeId(generateEmployeeId(name))
+                    .employeeId(generateEmployeeId(name))
                     .name(name)
                     .email(email)
                     .role(role)
@@ -32,6 +38,13 @@ public class EmployeeService {
                     .build();
 
             employeeRepository.save(employee);
+            User user = User
+                    .builder()
+                    .role(Role.ADMIN)
+                    .password(passwordEncoder.encode(password))
+                    .username(employee.getUsername()).build();
+            userRepository.save(user);
+
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong!";
         }
@@ -44,6 +57,8 @@ public class EmployeeService {
         String source = "EMP" + name + System.currentTimeMillis();
         byte[] bytes = source.getBytes("UTF-8");
         UUID uuid = UUID.nameUUIDFromBytes(bytes);
-        return uuid.toString();
+        return uuid.toString().replace("-","").substring(0, 13);
     }
+
+
 }

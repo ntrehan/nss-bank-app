@@ -1,15 +1,18 @@
 package com.nss.bank.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
+
 import java.util.Date;
 
 @Entity
+@Data
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "nss_accounts")
 public abstract class Account {
 
     @Id
-    @Column(name = "accountnumber", length = 10, nullable = false)
+    @Column(name = "accountnumber", length = 15, nullable = false)
     private String accountNumber;
 
     @Column(name = "street", length = 20, nullable = false)
@@ -68,10 +71,10 @@ public abstract class Account {
         this.openDate = openDate;
     }
 
-//    public String getCustomerId() {
-//        return customerId;
+//    public Customer getCustomerId() {
+//        return this.customerId.;
 //    }
-
+//
 //    public void setCustomerId(String customerId) {
 //        this.customerId = customerId;
 //    }
