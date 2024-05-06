@@ -2,12 +2,14 @@ package com.nss.bank;
 
 import com.nss.bank.repository.CustomerRepository;
 import com.nss.bank.repository.EmployeeRepository;
+import com.nss.bank.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -27,7 +29,9 @@ public class ApplicationConfig implements WebMvcConfigurer {
     }
 
 
-    private final EmployeeRepository employeeRepository;
+//    private final EmployeeRepository employeeRepository;
+
+    private final UserRepository userRepository;
 
     private final CustomerRepository customerRepository;
 
@@ -38,8 +42,10 @@ public class ApplicationConfig implements WebMvcConfigurer {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> customerRepository.findByCustomerId(username)
-                .orElseThrow(() -> new UsernameNotFoundException("Customer not found"));
+//        return username -> customerRepository.findByCustomerId(username)
+//                .orElseThrow(() -> new UsernameNotFoundException("Customer not found"));
+        return username -> userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found!"));
     }
 
     @Bean

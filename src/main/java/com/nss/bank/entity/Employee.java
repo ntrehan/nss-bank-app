@@ -20,7 +20,8 @@ import java.util.List;
 public class Employee implements UserDetails {
 
     @Id
-    private String EmployeeId;
+    @Column(name = "employeeid", length = 15, nullable = false)
+    private String employeeId;
 
     @Column(nullable = false)
     private String name;
@@ -42,32 +43,32 @@ public class Employee implements UserDetails {
 
     @Override
     public String getPassword() {
-        return null;
+        return this.password;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return this.employeeId;
     }
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return true;
     }
 
 

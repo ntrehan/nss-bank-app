@@ -34,6 +34,7 @@ public class User implements UserDetails {
 //    @JoinColumn(name = "customerid", nullable = false)
 //    private Customer customerId;
 
+    @Getter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Role role;
@@ -43,6 +44,17 @@ public class User implements UserDetails {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
+
+    @Override
+    public String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
     @Override
     public boolean isAccountNonExpired() {
         return true;
@@ -50,7 +62,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
