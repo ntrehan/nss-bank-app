@@ -47,7 +47,7 @@ public class CustomerService {
                     .zipCode(requestModel.getZipcode())
                     .city(requestModel.getCity())
                     .name(requestModel.getName())
-                    .password(passwordEncoder.encode("password"))
+                    .password(passwordEncoder.encode(requestModel.getPassword()))
                     .state(requestModel.getState()).build();
 
             customerRepository.save(customer);
@@ -59,7 +59,7 @@ public class CustomerService {
                     .build();
             userRepository.save(user);
 
-            return "Ho agya";
+            return user.getUsername();
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong";
         }

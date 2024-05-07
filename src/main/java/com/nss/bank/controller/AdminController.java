@@ -39,8 +39,7 @@ public class AdminController {
     private AuthService authService;
     @PostMapping("/signup")
     public String signup(@RequestParam String name, @RequestParam String password, @RequestParam String email, @RequestParam Role role) {
-        employeeService.saveEmployee(name, password, email, role);
-        return "Oh yess!!";
+        return employeeService.saveEmployee(name, password, email, role);
     }
 
     @GetMapping("/accounts")

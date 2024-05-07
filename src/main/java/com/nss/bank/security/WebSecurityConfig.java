@@ -35,7 +35,8 @@ public class WebSecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/admin/**", "/admin/register","/admin/login", "/customer/signup", "customer/login","/institutes").permitAll()  // Allow all requests to /admin/**
+                        .requestMatchers("/admin/**", "/admin/register","/admin/login","/institutes/**","/customer/**", "/api/**"
+                        ,"/checking/**","/savings/**").permitAll()  // Allow all requests to /admin/**
                         .anyRequest().authenticated()  // Require authentication for all other requests
                 )
                 .httpBasic(Customizer.withDefaults())  // Enable HTTP Basic Authentication

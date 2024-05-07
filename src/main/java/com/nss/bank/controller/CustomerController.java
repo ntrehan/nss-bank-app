@@ -69,8 +69,8 @@ public class CustomerController {
 
     @PostMapping("/signup")
     public String addCustomer(@RequestBody RequestModel requestModel) {
-        customerService.saveCustomer(requestModel);
-        return "Hell Yeah";
+        return customerService.saveCustomer(requestModel);
+
     }
 
 //    @Pos

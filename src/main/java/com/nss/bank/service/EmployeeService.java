@@ -44,11 +44,10 @@ public class EmployeeService {
                     .password(passwordEncoder.encode(password))
                     .username(employee.getUsername()).build();
             userRepository.save(user);
-
+            return user.getUsername();
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong!";
         }
-        return "Ho Gaya";
 
 
 //        return new Employee();

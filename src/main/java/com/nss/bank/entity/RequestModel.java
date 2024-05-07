@@ -10,4 +10,5 @@ public class RequestModel {
     private String city;
     private String state;
     private int zipcode;
+    private String password;
 }
