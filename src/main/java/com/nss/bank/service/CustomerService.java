@@ -34,20 +34,20 @@ public class CustomerService {
     }
 
     public Optional<Customer> getCustomerById(String customerId) {
-        return customerRepository.findById(customerId);
+        return customerRepository.findByCustomerId(customerId);
     }
 
     @Transactional
     public String saveCustomer(RequestModel requestModel) {
         try {
-            Customer customer = Customer.builder()
-                    .customerId(generateCustomerId(requestModel.getName()))
+f                    .customerId(generateCustomerId(requestModel.getName()))
                     .role(Role.USER)
                     .street(requestModel.getStreet())
                     .zipCode(requestModel.getZipcode())
                     .city(requestModel.getCity())
                     .name(requestModel.getName())
-                    .password(passwordEncoder.encode("password"))
+                    .password(passwordEncoder.encode(requestModel.getPassword()))
+                    .email(requestModel.getEmail())
                     .state(requestModel.getState()).build();
 
             customerRepository.save(customer);
@@ -59,7 +59,7 @@ public class CustomerService {
                     .build();
             userRepository.save(user);
 
-            return "Ho agya";
+            return user.getUsername();
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong";
         }

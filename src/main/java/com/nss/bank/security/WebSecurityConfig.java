@@ -27,7 +27,6 @@ public class WebSecurityConfig {
     @Autowired
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
@@ -46,44 +45,6 @@ public class WebSecurityConfig {
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
 
-//        return http
-//                .cors(AbstractHttpConfigurer::disable)
-//
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(authorize-> authorize.requestMatchers(
-//                        "/admin/**",
-//                        "/transaction/**",
-//                        "/v2/api-docs",
-//                        "/v3/api-docs",
-//                        "/v3/api-docs/**",
-//                        "/swagger-resources",
-//                        "/swagger-resources/**",
-//                        "/configuration/ui",
-//                        "/configuration/security",
-//                        "/swagger-ui/**",
-//                        "/webjars/**",
-//                        "swagger-ui.html"
-//                )
-//                .permitAll()
-//                .anyRequest()
-//                .authenticated())
-//                .authorizeHttpRequests(authorize -> authorize.requestMatchers("/api/auth/**").authenticated()).httpBasic(Customizer.withDefaults())
-//                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-//                .build();
-//        http
-//                .csrf(AbstractHttpConfigurer::disable)
-//                .authorizeHttpRequests(authorize -> authorize
-//                        .requestMatchers("/admin/*").authenticated()
-//                            .requestMatchers("/**").permitAll()
-////                        .requestMatchers("/admin/*").hasRole("ADMIN")
-//                ).httpBasic(Customizer.withDefaults())
-//                .sessionManagement(httpSecuritySessionManagementConfigurer -> httpSecuritySessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authenticationProvider(authenticationProvider)
-//                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-//
-//        return http.build();
     }
 
 //    @Autowired

@@ -39,8 +39,8 @@ public class AdminController {
     private AuthService authService;
     @PostMapping("/signup")
     public String signup(@RequestParam String name, @RequestParam String password, @RequestParam String email, @RequestParam Role role) {
-        employeeService.saveEmployee(name, password, email, role);
-        return "Oh yess!!";
+        return employeeService.saveEmployee(name, password, email, role);
+
     }
 
     @GetMapping("/accounts")
@@ -53,28 +53,15 @@ public class AdminController {
         if(!((User) userDetails).getRole().equals(Role.ADMIN)) throw new RuntimeException("Something went wrong!");
         return accountRepository.findAll();
 
-
     }
-
-//    @PostMapping("/add/customer")
-//    public String addCustomer(@RequestParam String name,
-//                              @RequestParam String street, @RequestParam String city,
-//                              @RequestParam String state, @RequestParam int zipCode) {
-//        customerService.saveCustomer(name, street, city, state,zipCode);
-//        return "Hell Yeah";
-//    }
 
     @PostMapping("/login")
     public String login(@RequestParam String employeeId, @RequestParam String password) throws Exception {
         try {
             return authService.login(employeeId, password);
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage());        }
+            throw new Exception(ex.getMessage());
+        }
     }
 
-
-//    @PostMapping("/add/register")
-//    public String register(@RequestBody RequestModel requestModel) {
-//        return authService.register(requestModel);
-//    }
 }

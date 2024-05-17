@@ -28,6 +28,9 @@ public class Customer implements UserDetails {
     @Column(nullable = false)
     private String password;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
     @Getter
     @Setter
     @Column(name = "street", length = 20, nullable = false)

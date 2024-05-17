@@ -36,7 +36,6 @@ public class CheckingAccountService {
         CheckingAccount checkingAccount = new CheckingAccount();
         checkingAccount.setAccountNumber(generateAccountNumber(checkingRequestModel.getCustomerId()+checkingRequestModel.getOpenDate()));
         checkingAccount.setAccountType("Checking");
-//        savingAccount.setInterest(4.0);
         checkingAccount.setCity(checkingRequestModel.getCity());
         checkingAccount.setState(checkingRequestModel.getState());
         checkingAccount.setServiceCharge(checkingRequestModel.getServiceCharge());

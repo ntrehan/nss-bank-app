@@ -9,5 +9,7 @@ public class RequestModel {
     private String street;
     private String city;
     private String state;
+    private String password;
+    private String email;
     private int zipcode;
 }

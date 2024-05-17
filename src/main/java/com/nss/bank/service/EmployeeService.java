@@ -45,13 +45,12 @@ public class EmployeeService {
                     .username(employee.getUsername()).build();
             userRepository.save(user);
 
+            return user.getUsername();
+
         } catch (UnsupportedEncodingException ex) {
             return "Something went wrong!";
         }
-        return "Ho Gaya";
 
-
-//        return new Employee();
     }
     private String generateEmployeeId(String name) throws UnsupportedEncodingException {
         String source = "EMP" + name + System.currentTimeMillis();
@@ -59,6 +58,5 @@ public class EmployeeService {
         UUID uuid = UUID.nameUUIDFromBytes(bytes);
         return uuid.toString().replace("-","").substring(0, 13);
     }
-
 
 }

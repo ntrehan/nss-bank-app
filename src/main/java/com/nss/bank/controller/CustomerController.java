@@ -1,5 +1,6 @@
 package com.nss.bank.controller;
 
+import com.nss.bank.cache.CacheStore;
 import com.nss.bank.entity.*;
 import com.nss.bank.security.JwtService;
 import com.nss.bank.service.AuthService;
@@ -27,6 +28,13 @@ public class CustomerController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private CacheStore<Customer> customerCacheStore;
+
+    @Autowired
+    private CacheStore<String> userNameStore;
+
+
     @GetMapping
     public List<Customer> getAllCustomers(@RequestHeader (name="Authorization") String token) {
         String jwt = token.substring(7);
@@ -42,7 +50,14 @@ public class CustomerController {
     @GetMapping("/info")
     public Optional<Customer> getCustomerById(@PathParam("customerId") String customerId , @RequestHeader (name="Authorization") String token) {
         if(!validateUser(customerId, token)) throw new RuntimeException("Something went wrong!");
-        return customerService.getCustomerById(customerId);
+        Customer cachedCustomer = customerCacheStore.get(customerId);
+        if (cachedCustomer != null) {
+            System.out.println("Customer record found in cache: " + cachedCustomer.getCustomerId() + " " + cachedCustomer.getName());
+            return Optional.of(cachedCustomer);
+        }
+        Optional<Customer> customerInfo =  customerService.getCustomerById(customerId);
+        customerCacheStore.add(customerId, customerInfo.get());
+        return customerInfo;
     }
 
     @GetMapping("/accounts")
@@ -69,22 +84,9 @@ public class CustomerController {
 
     @PostMapping("/signup")
     public String addCustomer(@RequestBody RequestModel requestModel) {
-        customerService.saveCustomer(requestModel);
-        return "Hell Yeah";
+        return customerService.saveCustomer(requestModel);
     }
 
-//    @Pos
-
-//    @PostMapping
-//    public Customer createCustomer(@RequestBody Customer customer) {
-//        return customerService.saveCustomer(customer);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public Customer updateCustomer(@PathVariable String id, @RequestBody Customer customer) {
-////        customer.setCustomerId(id);
-//        return customerService.saveCustomer(customer);
-//    }
 
     @DeleteMapping("/{id}")
     public void deleteCustomer(@PathVariable String id) {

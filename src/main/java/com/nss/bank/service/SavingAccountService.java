@@ -36,7 +36,6 @@ public class SavingAccountService {
         SavingAccount savingAccount = new SavingAccount();
         savingAccount.setAccountNumber(generateAccountNumber(savingsRequestModel.getCustomerId()+savingsRequestModel.getOpenDate()));
         savingAccount.setAccountType("Savings");
-//        savingAccount.setInterest(4.0);
         savingAccount.setCity(savingsRequestModel.getCity());
         savingAccount.setState(savingsRequestModel.getState());
         savingAccount.setInterest(savingsRequestModel.getInterestRate());
