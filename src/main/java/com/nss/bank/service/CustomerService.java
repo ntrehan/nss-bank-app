@@ -40,7 +40,8 @@ public class CustomerService {
     @Transactional
     public String saveCustomer(RequestModel requestModel) {
         try {
-f                    .customerId(generateCustomerId(requestModel.getName()))
+            Customer customer = Customer.builder()
+                    .customerId(generateCustomerId(requestModel.getName()))
                     .role(Role.USER)
                     .street(requestModel.getStreet())
                     .zipCode(requestModel.getZipcode())
